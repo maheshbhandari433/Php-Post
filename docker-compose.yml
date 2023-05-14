@@ -6,13 +6,13 @@ services:
       context: ./phpDir
       dockerfile: Dockerfile
     depends_on:
-      - db
+      - db2
     volumes:
       - ./phpDir/src:/var/www/html/
     ports:
-      - 8005:80
-  db:
-    container_name: db
+      - 8008:80
+  db2:
+    container_name: db2
     image: mysql
     restart: always
     environment:
@@ -21,13 +21,13 @@ services:
       MYSQL_USER: lionUser
       MYSQL_PASSWORD: lionPass
     ports:
-      - '9906:3306'
+      - '9806:3308'
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - '9080:80'
+      - '9070:80'
     restart: always
     environment:
-      PMA_HOST: db
+      PMA_HOST: db2
     depends_on:
-      - db
+      - db2
